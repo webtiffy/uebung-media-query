@@ -3,8 +3,62 @@
 }
 
 html, body{
-	height:  100%;
+	min-height:  100%; /*mind. so hoch wie der Bildschirm aber wenns durch den Inhalt länger wird, wird der body höher*/
 	width:  100%;
 	font-family: Helvetica, Arial, sans-serif;
 	font-size: 100%;
+}
+
+.wrapper{
+	background: yellow;
+	height: 100%; /*div macht sich so breit wie es kann (Breite vom body (100%)) ist aber ohne Angabe in der Höhe 0 wenn noch nichts drin ist. Daher geben wir an wie hoch er sein soll - hier 100% vom body*/
+	width: 80%; /*Sagen nun 80%, also nicht 100% so groß wie body sondern 80% vom body.*/
+	margin: auto; /*Der Abstand vom body-Rand links und rechts ist gleich, also ist der gelbe Kasten mittig*/
+}
+
+.card{ /*Mache einen Rand um jede div card*/
+	border: 1px black dotted; /*Sehe das eine card so breit ist wie wrapper und so hoch ist wie Inhalt, aktuell Bild + drunter liegende Überschrift*/
+	position: relative; /*Muss ich relative setzen damit .card h1 weiß über was es sich legen soll*/
+}
+
+.card h1{ /*Rede mit Überschriten in cards*/
+	position: absolute; /*Liegt ÜBER irgendwas --> siehe .-card position*/
+	background-color: white;
+	padding: 5px; /*weißer Farbe um Schrift wird fetter, gibt Futter drum herum*/
+	/*margin-left: 20px; Stößt sich 20px vom Rand des Bildes weg*/
+	border: 3px solid #3f888f; /*Kann alles zusammen werfen und in border schreiben, brauche aber immer drei Sachen: border-style (zb solid), border-color, border-width*/
+	outline: 2px solid #ff1493; /*Nochmal ein Rahmen um border drum*/
+	/*Mit den folgenden 3 Codes zentrieren wir die Überschrift, transform...brauchen wir damit wir nicht mittig an der Ecker der Schrift landen sondern die Mitte der Schrift in der Mitte des Bildes sind, wir rücken also ein*/
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	/*
+	Oder statt top, left und transform bei .card...
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	*/
+}
+
+.card img{ /*will nur mit Bildern in card reden, daher .card img*/
+	width: 100%; /*Bild wächst oder schrumpft mit Karte, je nachdem wie groß der Bildschirm ist, soll immer 100% vom Bildschirm sein*/
+	display: block; /*nicht so wichtig zu wissen was es ist ;-)*/
+}
+
+@media (min-width:1024px){ /*Denken immer in einem kleinen Gerät und denken dann größer. Spreche also die Weite eines Geräts mit @media an und muss immer eine Weite angeben. Wenn die Weite >= 1024px hat, dann wird der Hintergrund vom body rot*/
+	body{
+		background: red;
+	}
+	.row{ /*Haben für kleines Gerät programmiert und die Bilder sind untereinander. Wird der Bildschirm größer, sollten die Bilder nebeneinander stehen, 1024 px ist wieder die Schnittstelle*/
+		display: flex;
+		/*
+		Alternative Lösung statt display: flex; in @media nun folgendes auch in @media schreiben:
+		.card{
+		float: left;
+		width: 33,33%;(damit 3 Bilder nebeneinander passen)
+		}*/
+	}
+	.card{
+		margin: 5px; /*Mache einen Rand um jedes Bild*/
+	}
 }
